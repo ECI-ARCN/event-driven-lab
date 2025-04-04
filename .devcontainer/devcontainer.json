@@ -7,7 +7,14 @@
     "features": {
         // Incluye Docker-in-Docker para poder construir imágenes dentro de Codespaces si es necesario
         // Aunque el despliegue final es en Play with Docker, puede ser útil para pruebas locales.
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        // Añade explícitamente la feature de Maven
+        "ghcr.io/devcontainers/features/java:1": {
+          "version": "none",
+          "installMaven": "true",
+          "mavenVersion": "3.8.6",
+          "installGradle": "false"
+        }
     },
 
     // Puertos a exponer desde Codespaces (útil para pruebas locales)
@@ -24,9 +31,11 @@
             "extensions": [
                 "vscjava.vscode-java-pack",
                 "vmware.vscode-spring-boot",
+                "pivotal.vscode-spring-boot",
                 "ms-azuretools.vscode-docker",
-                "redhat.java", // Asegura buena compatibilidad Java
-                "pivotal.vscode-boot-dev-pack" // Extensiones útiles para Spring Boot
+                "redhat.java",
+                "pivotal.vscode-boot-dev-pack",
+                "vmware.vscode-boot-dev-pack"
             ]
         }
     },
