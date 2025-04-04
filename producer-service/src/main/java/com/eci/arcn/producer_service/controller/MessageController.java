@@ -24,7 +24,7 @@ public class MessageController {
 
     @PostMapping("/send")
     public String sendMessage(@RequestParam String message) {
-        log.info("Enviando mensaje: '{}' al exchange '{}' con routing key '{}'", message, exchangeName, routingKey);
+        log.info("Enviando mensaje: '{}' a exchange '{}' con routing key '{}'", message, exchangeName, routingKey);
         // Enviar el mensaje al exchange con la routing key definida
         rabbitTemplate.convertAndSend(exchangeName, routingKey, message);
         return "Mensaje '" + message + "' enviado!";
