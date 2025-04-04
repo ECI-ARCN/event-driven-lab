@@ -10,21 +10,19 @@ services:
     ports:
       - "5672:5672"   # Puerto AMQP
       - "15672:15672" # Puerto UI de Gestión (accesible vía Play With Docker)
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq/ # Persistencia (opcional para PWD)
-    environment:
+    # volumes:
+    #   - rabbitmq_data:/var/lib/rabbitmq/ # Persistencia (opcional para PWD)
+    # environment:
       # Puedes mantener los de por defecto (guest/guest) o definirlos
       # RABBITMQ_DEFAULT_USER: user
       # RABBITMQ_DEFAULT_PASS: password
-      RABBITMQ_DEFAULT_VHOST: / # Virtual host por defecto
+      # RABBITMQ_DEFAULT_VHOST: / # Virtual host por defecto
     networks:
       - event_network
 
   # Servicio Productor
   producer:
-    build:
-      context: ./producer-service # Directorio donde está el Dockerfile
-      dockerfile: Dockerfile
+    image: idsanchezf/producer-service
     container_name: producer-service
     ports:
       - "8080:8080" # Expone el puerto del API REST del productor
@@ -40,9 +38,7 @@ services:
 
   # Servicio Consumidor
   consumer:
-    build:
-      context: ./consumer-service
-      dockerfile: Dockerfile
+    image: idsanchezf/consumer-service
     container_name: consumer-service
     depends_on:
       - rabbitmq
@@ -58,5 +54,5 @@ networks:
     driver: bridge
 
 # Volumen para persistencia de datos de RabbitMQ (opcional)
-volumes:
-  rabbitmq_data:
+# volumes:
+#   rabbitmq_data:
