@@ -32,6 +32,9 @@ services:
       # Sobrescribe la configuración de application.properties para asegurar el host correcto
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+
       # Opcional: Añadir perfiles de Spring, configuraciones de memoria, etc.
       # - SPRING_PROFILES_ACTIVE=docker
     networks:
